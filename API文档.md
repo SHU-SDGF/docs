@@ -55,7 +55,7 @@ url-prefix: `/inspections`
 url: `GET /inspections`
 
 > Input
-```json
+```javascript
 N/A
 ```
 
@@ -73,7 +73,7 @@ N/A
 ]
 ```
 
-#### 2.2 获取巡检活动类型
+#### 2.2 获取活动类型
 URL: `GET /inspections/activityTypes`
 > Input
 ```javascript
@@ -93,7 +93,7 @@ N/A
 ]
 ```
 
-#### 2.3 获取巡检活动列表
+#### 2.3 获取活动列表
 Url: `GET /inspections/:inspectionID/activities`
 
 > Input
@@ -129,7 +129,7 @@ N/A
 ]
 ```
 
-#### 2.3 获取巡检活动
+#### 2.3 获取活动
 Url: `GET /inspections/all/activities/:activityID`
 ```javascript
 {
@@ -141,7 +141,7 @@ Url: `GET /inspections/all/activities/:activityID`
     "description": "",
     "activityTypeID": 123,
     "createdAt": ...,
-    "status": 2,
+    "status": 2, // [1: start,2: ongoing, 3: end]
     "medias": [
         {
             "mediaID": 22,
@@ -157,6 +157,20 @@ Url: `GET /inspections/all/activities/:activityID`
         },
     ]
 }
+```
+
+#### 2.4 get media detail
+Url: `GET /medias/:mediaIDs`
+
+> Output
+```javascript
+[
+    {
+        "mediaType": "image", // image|video|audio
+        "previewUrl": "medias/imgs/preview/tpfFJB231-52D.PNG", // url of preview image
+        "downloadUrl": "medias/imgs/full/5kjqrwf.jpg",
+    }
+]
 ```
 
 #### 2.4 搜索巡检活动
@@ -209,7 +223,7 @@ Url: `POST /inspections/:inspectionID/activities/search`
 #### 2.5 创建巡检活动
 Url: `POST /inspections/:inspectionID/activities`
 > Input
-```
+```javascript
 "Headers": {
     "Content-Type": "none"
 },
@@ -225,7 +239,7 @@ Url: `POST /inspections/:inspectionID/activities`
 }
 ```
 > Output
-```
+```javascript
 {
     "id": 123,
     "createdAt": ...,
@@ -235,16 +249,16 @@ Url: `POST /inspections/:inspectionID/activities`
 #### 2.6 删除巡检多媒体
 Url: `DELETE /inspections/all/activities/:activityID/medias/:mediaID`
 > Output
-```
+```javascript
 {
-    id: mediaID
+    "id": mediaID
 }
 ```
 
 #### 2.7 更新巡检活动
 Url: `PUT /inspections/:inspectionID/activities/:activityID`
 > Input
-```
+```javascript
 "Headers": {
     "Content-Type": "none"
 },
@@ -260,7 +274,7 @@ Url: `PUT /inspections/:inspectionID/activities/:activityID`
 }
 ```
 > Output
-```
+```javascript
 {
     "id": 123,
     "createdAt": ...,
@@ -277,12 +291,31 @@ Url: `DELETE /inspections/:inspectionID/activities/:activityID`
 },
 ```
 
+### 3. tunnels
+url-prefix: `/tunnels`
 
-### 3 地下设施
-url-prefix: `/facilities`
+#### 3.1 get tunnels
+url: `GET /tunnels`
 
-#### 3.1 获取设施列表
-Url: `GET /facilities`
+> Output
+```javascript
+[
+    {
+        "id": 123,
+        "name": "tunnel1",
+        "description": "description"
+    },
+    {
+        "id": 124,
+        "name": "tunnel2",
+        "description": "description"
+    }
+]
+```
+
+#### 3.2 get facilities
+url: `GET /:tunnelID/facilities`
+
 > Output
 ```javascript
 [
@@ -296,8 +329,10 @@ Url: `GET /facilities`
     }
 ]
 ```
+### 4 地下设施
+url-prefix: `/facilities`
 
-#### 3.2 获取设施
+#### 4.1 获取设施
 Url: `GET /facilities/:facilityID`
 > Output
 ```javascript
@@ -384,7 +419,7 @@ Url: `GET /facilities/:facilityID`
 
 ```
 
-#### 3.3 获取灾害种类
+#### 4.2 获取灾害种类
 Url: `GET /diseaseTypes`
 > Output
 ```javascript
@@ -406,7 +441,7 @@ Url: `GET /diseaseTypes`
 ]
 ```
 
-#### 3.4 上传灾害
+#### 4.3 上传灾害
 > Input
 ```javascript
 [
@@ -453,4 +488,4 @@ Url: `GET /diseaseTypes`
 ]
 ```
 
-3.5 
+### 4.4
