@@ -3775,9 +3775,9 @@ CREATE TABLE `t_facility_insp_detail` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_facility_insp_sum`;
 CREATE TABLE `t_facility_insp_sum` (
-  `MILEAGE` varchar(15) NOT NULL,
+  `DISEASE_NO` varchar(15)NOT NULL,
+  `MILEAGE` varchar(15) DEFAULT NOT NULL,
   `PHOTO_STANDARD` varchar(200) DEFAULT NULL,
-  `DISEASE_NO` varchar(15) DEFAULT NULL,
   `DISEASE_DATE` date DEFAULT NULL,
   `Monomer_No` varchar(10) DEFAULT NULL,
   `FACILITY_NO` char(22) DEFAULT NULL,
@@ -3954,3 +3954,34 @@ INSERT INTO `t_surr_info` VALUES ('HDLL100NU000N00101_000', '联通大厦', '地
 INSERT INTO `t_surr_info` VALUES ('HDLL200NU000N00022_000', '秦皇岛码头     ', '地上建筑物', 'A', '西线', '209.3646', null, null, '已建', null, '运营中', '上海游船服务中心', '400-880-9118', '\\照片\\周边环境照片\\秦皇岛码头');
 INSERT INTO `t_surr_info` VALUES ('HDLL200NU000N00082_000', '宏惠花苑2期', '地上建筑物', 'B', '西线', '168.98', null, null, '已建', null, '运营中', '', '', '');
 SET FOREIGN_KEY_CHECKS=1;
+
+-- ----------------------------
+-- Table structure for t_tag_info
+-- ----------------------------
+DROP TABLE IF EXISTS `t_tag_info`;
+CREATE TABLE `t_tag_info` (
+  `ID` int(3) NOT NULL AUTO_INCREMENT,
+  `ACT_NO` char(11) DEFAULT NULL,
+  `ACT_NAME` varchar(20) DEFAULT NULL,
+  `START_DATE` date DEFAULT NULL,
+  `Surround_No` char(22) DEFAULT NULL,
+  `TAG_ID` varchar(255) DEFAULT NULL,
+  `END_DATE` date DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `ACT_LEVEL` char(2) DEFAULT NULL,
+  `LONGITUDE` decimal(5,2) DEFAULT NULL,
+  `LATITUDE` decimal(5,2) DEFAULT NULL,
+  `SynChronize` char(1) DEFAULT NULL,
+  `DEL_FLG` char(1) DEFAULT NULL,
+  `UPDATE_CNT` decimal(5,0) DEFAULT NULL,
+  `CREATE_USER` varchar(40) DEFAULT NULL,
+  `CREATE_DATE` date DEFAULT NULL,
+  `UPDATE_DATE` date DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Surround_No` (`Surround_No`),
+  CONSTRAINT `t_surr_act_sum_ibfk_1` FOREIGN KEY (`Surround_No`) REFERENCES `t_surr_info` (`Surround_No`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_surr_act_sum
+-- ----------------------------
